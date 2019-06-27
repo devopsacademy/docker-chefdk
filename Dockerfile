@@ -34,4 +34,4 @@ RUN chown -R chefdk:chefdk /home/chefdk && \
 
 WORKDIR /home/chefdk
 
-ENTRYPOINT ["/bin/bash", "-l", "-c"]
+ENTRYPOINT ["/bin/bash"]
