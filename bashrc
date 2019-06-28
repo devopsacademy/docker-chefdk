@@ -2,6 +2,8 @@ if [ -f /etc/bashrc ]; then
  . /etc/bashrc
 fi
 
+export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+
 alias ll='ls -Al'
 alias s='cd ..'
 
