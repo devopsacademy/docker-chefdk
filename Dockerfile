@@ -13,7 +13,7 @@ RUN curl -s https://packages.chef.io/chef.asc | \
          apt-get update && \
          apt-get install chefdk
 
-RUN gem install --no-doc --no-ri foodcritic bundler
+RUN gem install --no-doc --no-ri foodcritic bundler rubocop
 
 RUN apt-get clean -y && rm -rf /root/.gem
 
