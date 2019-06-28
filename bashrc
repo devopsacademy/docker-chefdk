@@ -29,8 +29,10 @@ if [ -f /usr/local/share/git-prompt.sh ]; then
 fi
 
 if [ -f "${HOME}/.chef/credentials" ]; then
-  XCHEF_SERVER=$(grep ^chef_server_url "${HOME}/.chef/credentials" | cut -d \' -f2')
+  XCHEF_SERVER=$(grep ^chef_server_url "${HOME}/.chef/credentials" | cut -d "'" -f2 2>/dev/null )
   if [ "x" != "x${XCHEF_SERVER}" ]; then
     cowthink -p -W120 "$(tput setaf 2)${XCHEF_SERVER}$(tput sgr0)"
+  else
+    cowthing -p -W12 'No chef configuration found'
   fi
 fi
