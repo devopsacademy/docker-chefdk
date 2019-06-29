@@ -35,6 +35,8 @@ if [ -f "${HOME}/.chef/credentials" ]; then
   if [ "x" != "x${XCHEF_SERVER}" ]; then
     cowthink -p -W120 "$(tput setaf 2)${XCHEF_SERVER}$(tput sgr0)"
   else
-    cowthing -p -W12 'No chef configuration found'
+    cowthing -p -W12 'No server configuration found'
   fi
+else
+  cowthing -p -W12 'No chef configuration found'
 fi
