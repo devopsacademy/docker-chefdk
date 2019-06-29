@@ -30,17 +30,23 @@ if [ -f /usr/local/share/git-prompt.sh ]; then
   fi
 fi
 
-tput setaf 2
-if [ -f "${HOME}/.chef/credentials" ]; then
-  XCHEF_SERVER=$(grep ^chef_server_url "${HOME}/.chef/credentials" | cut -d "'" -f2 2>/dev/null )
-  if [ "x" != "x${XCHEF_SERVER}" ]; then
-    cowthink -p -W120 "${XCHEF_SERVER}"
+chef-info() {
+  tput setaf 2
+  if [ -f "${HOME}/.chef/credentials" ]; then
+    XCHEF_SERVER=$(grep ^chef_server_url "${HOME}/.chef/credentials" | cut -d "'" -f2 2>/dev/null )
+    XCHEF_USER=$(grep ^client_name "${HOME}/.chef/credentials" | cut -d "'" -f2 2>/dev/null )
+    if [ "x" != "x${XCHEF_SERVER}" ]; then
+       echo -e "Chef URL: ${XCHEF_SERVER}\nUsername: ${XCHEF_USER}" | cowthink -p -n -W120
+    else
+      tput setaf 1
+      cowthink -p -W120 'No server configuration found'
+    fi
   else
     tput setaf 1
-    cowthink -p -W120 'No server configuration found'
+    cowthink -p -W120 'No chef configuration found'
   fi
-else
-  tput setaf 1
-  cowthink -p -W120 'No chef configuration found'
-fi
-tput sgr0
+  tput sgr0
+}
+
+
+chef-info
