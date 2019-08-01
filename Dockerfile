@@ -18,7 +18,7 @@ RUN apt-get update
 RUN wget --quiet --output-document /tmp/chefdk.deb \
          "https://packages.chef.io/repos/apt/stable/ubuntu/18.04/chefdk_${CHEFDK_VERSION}_amd64.deb"
 
-RUN dpkg -i /tmp/chefdk.deb
+RUN dpkg -i /tmp/chefdk.deb && rm -f /tmp/chefdk.deb
 
 RUN gem install --no-doc --no-ri bundler
 
