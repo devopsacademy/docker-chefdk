@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+CHEF_ORG="$(basename $(pwd))"
+CHEF_CLUSTER="$(basename $(dirname $(pwd)))"
+
+mkdir -p "${HOME}/tmp/logs"
+HISTORY_FILE="${HOME}/tmp/logs/chefdk.log"
+touch "${HISTORY_FILE}"
+
+docker run --rm \
+           -v "${HISTORY_FILE}:/home/chefdk/.bash_history" \
+           -v "$(pwd):/home/chefdk/workdir" \
+           -v "${HOME}/.config/chef/${CHEF_CLUSTER}/${CHEF_ORG}:/home/chefdk/.chef:ro" \
+           -m 4GB \
+           --cpus 4 \
+           --user chefdk:chefdk  \
+           -i -t local/chefdk

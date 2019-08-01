@@ -32,6 +32,7 @@ COPY git-prompt.sh /usr/local/share/git-prompt.sh
 RUN chmod 644 /usr/local/share/git-prompt.sh
 
 COPY bashrc /home/chefdk/.bashrc
+COPY bash_logout /home/chefdk/.bash_logout
 COPY inputrc /etc/inputrc
 RUN chmod 644 /etc/inputrc
 

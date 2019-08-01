@@ -14,6 +14,10 @@ export PROMPT_COMMAND='history -a; history -c; history -r'
 shopt -s histappend
 shopt -s checkwinsize
 
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
 fancy_prompt() {
   local red=$(tput setaf 208)
   local green=$(tput setaf 2)
@@ -37,16 +41,20 @@ chef-info() {
     XCHEF_USER=$(grep ^client_name "${HOME}/.chef/credentials" | cut -d "'" -f2 2>/dev/null )
     if [ "x" != "x${XCHEF_SERVER}" ]; then
        echo -e "Chef URL: ${XCHEF_SERVER}\nUsername: ${XCHEF_USER}" | cowthink -p -n -W120
+       title "${XCHEF_USER}@chef/${XCHEF_SERVER##*/}"
     else
       tput setaf 1
       cowthink -p -W120 'No server configuration found'
+      title chefdk
     fi
   else
     tput setaf 1
     cowthink -p -W120 'No chef configuration found'
+    title chefdk
   fi
   tput sgr0
 }
 
-
 chef-info
+
+trap '. $HOME/.bash_logout; exit' 0
