@@ -4,6 +4,7 @@ fi
 
 export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
+alias ls='ls --color'
 alias ll='ls -Al'
 alias s='cd ..'
 
